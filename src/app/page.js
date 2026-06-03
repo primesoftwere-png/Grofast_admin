@@ -1,0 +1,26 @@
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    
+    if (token) {
+      // Has token, redirect to dashboard
+      router.push("/dashboard");
+    } else {
+      // No token, redirect to login
+      router.push("/login");
+    }
+  }, [router]);
+
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-lg">Loading...</div>
+    </div>
+  );
+}
