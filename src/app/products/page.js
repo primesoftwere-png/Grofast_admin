@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import { productAPI, categoryAPI } from "@/lib/api";
+import { getImageUrl } from "@/lib/utils";
 import { Plus, Search, Package, Trash2, X, RefreshCw } from "lucide-react";
 
 export default function ProductsPage() {
@@ -101,7 +102,7 @@ export default function ProductsPage() {
               <div className="p-4">
                 <div className="flex aspect-square items-center justify-center rounded-xl bg-gradient-to-br from-black/5 via-gray-100 to-gray-200 text-3xl font-bold text-black/60 relative overflow-hidden">
                   {p.productImage ? (
-                    <img src={`${process.env.NEXT_PUBLIC_API_URL}/upload/${p.productImage}`} alt={p.productName} className="h-full w-full object-cover" />
+                    <img src={getImageUrl(p.productImage)} alt={p.productName} className="h-full w-full object-cover" />
                   ) : (
                     <span>{p.productName?.[0]}</span>
                   )}
