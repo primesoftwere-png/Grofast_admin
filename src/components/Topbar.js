@@ -150,7 +150,7 @@ function AvatarFallback({
    MAIN COMPONENT
 ========================= */
 
-export default function Topbar() {
+export default function Topbar({ onMenuClick }) {
   const router = useRouter();
   const [theme, setTheme] = useState("light");
   const [showNotifications, setShowNotifications] = useState(false);
@@ -198,6 +198,7 @@ export default function Topbar() {
         variant="ghost"
         size="icon"
         className="-ml-1 rounded-full lg:hidden"
+        onClick={onMenuClick}
       >
         <Menu className="h-5 w-5" />
       </Button>

@@ -11,7 +11,7 @@ export default function CouponsPage() {
   const [saving, setSaving] = useState(false);
   const [actioning, setActioning] = useState(null);
   const [form, setForm] = useState({
-    couponCode: "", couponType: "percentage", discountValue: "", minOrderAmount: "",
+    offerName: "", couponCode: "", couponType: "percentage", discountValue: "", minOrderAmount: "",
     maxDiscountAmount: "", usageLimit: "", validFrom: "", validUntil: "",
   });
 
@@ -27,13 +27,13 @@ export default function CouponsPage() {
   useEffect(() => { fetchCoupons(); }, [fetchCoupons]);
 
   const handleCreate = async () => {
-    if (!form.couponCode || !form.discountValue || !form.validFrom || !form.validUntil)
-      return alert("Code, discount value, and dates are required");
+    if (!form.offerName || !form.couponCode || !form.discountValue || !form.validFrom || !form.validUntil)
+      return alert("Offer name, code, discount value, and dates are required");
     try {
       setSaving(true);
       await couponAPI.create({ ...form, discountValue: Number(form.discountValue), minOrderAmount: Number(form.minOrderAmount || 0), maxDiscountAmount: Number(form.maxDiscountAmount || 0), usageLimit: Number(form.usageLimit || 0) });
       setShowForm(false);
-      setForm({ couponCode: "", couponType: "percentage", discountValue: "", minOrderAmount: "", maxDiscountAmount: "", usageLimit: "", validFrom: "", validUntil: "" });
+      setForm({ offerName: "", couponCode: "", couponType: "percentage", discountValue: "", minOrderAmount: "", maxDiscountAmount: "", usageLimit: "", validFrom: "", validUntil: "" });
       fetchCoupons();
     } catch (e) { alert("Failed to create coupon: " + (e.response?.data?.message || e.message)); }
     finally { setSaving(false); }
@@ -96,6 +96,7 @@ export default function CouponsPage() {
                 <Ticket className="absolute right-3 top-3 h-5 w-5 opacity-30"/>
                 <div className="text-xs opacity-70">Coupon code</div>
                 <div className="text-2xl font-bold tracking-wider">{c.couponCode}</div>
+                <div className="text-sm font-semibold mb-1 opacity-90">{c.offerName}</div>
                 <div className="mt-1 text-sm opacity-80">
                   {c.couponType === "percentage" ? `${c.discountValue}% OFF` : `₹${c.discountValue} OFF`}
                   {c.minOrderAmount > 0 && ` · Min ₹${c.minOrderAmount}`}
@@ -152,6 +153,12 @@ export default function CouponsPage() {
               <button onClick={() => setShowForm(false)} className="rounded-lg p-2 hover:bg-gray-100"><X className="h-4 w-4"/></button>
             </div>
             <div className="space-y-4">
+              <div>
+                <label className="text-sm font-medium">Offer Name *</label>
+                <input value={form.offerName} onChange={e => setForm(f => ({ ...f, offerName: e.target.value }))}
+                  placeholder="Summer Sale 2026"
+                  className="mt-1 h-10 w-full rounded-xl border border-gray-300 px-4 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black/10"/>
+              </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm font-medium">Coupon Code *</label>
