@@ -1,4 +1,3 @@
-import { Loader2 } from 'lucide-react';
 "use client";
 
 import React, { useState, useEffect } from "react";

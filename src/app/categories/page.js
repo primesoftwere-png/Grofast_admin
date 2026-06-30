@@ -1,5 +1,5 @@
-import toast from 'react-hot-toast';
 "use client";
+import toast from 'react-hot-toast';
 import React, { useState, useEffect, useCallback } from "react";
 import { categoryAPI } from "@/lib/api";
 import { Plus, Tag, Pencil, Trash2, X, Check, RefreshCw, Image as ImageIcon } from "lucide-react";

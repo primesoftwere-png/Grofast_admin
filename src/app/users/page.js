@@ -1,5 +1,5 @@
-import toast from 'react-hot-toast';
 "use client";
+import toast from 'react-hot-toast';
 
 import React, { useState, useEffect } from "react";
 import { userAPI } from "@/lib/api";

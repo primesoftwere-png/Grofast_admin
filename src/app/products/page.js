@@ -1,5 +1,5 @@
-import toast from 'react-hot-toast';
 "use client";
+import toast from 'react-hot-toast';
 import React, { useState, useEffect, useCallback } from "react";
 import { productAPI, categoryAPI } from "@/lib/api";
 import { getImageUrl } from "@/lib/utils";
