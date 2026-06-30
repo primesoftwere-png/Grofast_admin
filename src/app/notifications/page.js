@@ -1,3 +1,4 @@
+import { Loader2 } from 'lucide-react';
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -395,7 +396,7 @@ export default function NotificationsPage() {
           </CardHeader>
 
           <CardContent className="space-y-3">
-            {loading && <div className="text-center text-sm text-gray-500">Loading...</div>}
+            {loading && <div className="text-center text-sm text-gray-500"><div className="flex items-center justify-center gap-2"><Loader2 className="animate-spin w-5 h-5" /> Loading...</div></div>}
             {!loading && displayNotifications.map((n) => (
               <div
                 key={n.id}

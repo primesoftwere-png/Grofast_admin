@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -213,7 +214,7 @@ export default function UsersPage() {
       fetchUsers();
     } catch (error) {
       console.error('Error blocking user:', error);
-      alert('Failed to block user');
+      toast.error('Failed to block user');
     } finally {
       setActionLoading(null);
     }
@@ -226,7 +227,7 @@ export default function UsersPage() {
       fetchUsers();
     } catch (error) {
       console.error('Error unblocking user:', error);
-      alert('Failed to unblock user');
+      toast.error('Failed to unblock user');
     } finally {
       setActionLoading(null);
     }

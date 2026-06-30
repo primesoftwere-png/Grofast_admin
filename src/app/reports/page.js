@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import { reportAPI } from "@/lib/api";
@@ -42,7 +43,7 @@ export default function ReportsPage() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a"); a.href = url; a.download = `${type}-report.json`; a.click();
       URL.revokeObjectURL(url);
-    } catch { alert("Export failed"); }
+    } catch { toast.error("Export failed"); }
     finally { setExporting(null); }
   };
 

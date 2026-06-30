@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import { categoryAPI } from "@/lib/api";
@@ -62,8 +63,8 @@ export default function CategoriesPage() {
   };
 
   const handleSave = async () => {
-    if (!form.categoryName.trim()) return alert("Category name is required");
-    if (form.categoryType === "child" && !form.parentCategoryId) return alert("Parent category is required when creating a child category");
+    if (!form.categoryName.trim()) return toast.error("Category name is required");
+    if (form.categoryType === "child" && !form.parentCategoryId) return toast.error("Parent category is required when creating a child category");
     
     try {
       setSaving(true);
@@ -88,7 +89,7 @@ export default function CategoriesPage() {
       fetchCategories();
     } catch (e) {
       const msg = e.response?.data?.message || "Failed to save category";
-      alert(msg);
+      toast.error(msg);
     } finally {
       setSaving(false);
     }
@@ -102,7 +103,7 @@ export default function CategoriesPage() {
       fetchCategories();
     } catch (e) {
       const msg = e.response?.data?.message || "Failed to delete category";
-      alert(msg);
+      toast.error(msg);
     } finally {
       setDeleting(null);
     }

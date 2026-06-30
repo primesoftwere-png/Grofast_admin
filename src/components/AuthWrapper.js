@@ -1,3 +1,4 @@
+import { Loader2 } from 'lucide-react';
 "use client";
 
 import { useEffect, useState } from "react";
@@ -38,7 +39,7 @@ export default function AuthWrapper({ children }) {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
+        <div className="text-lg"><div className="flex items-center justify-center gap-2"><Loader2 className="animate-spin w-5 h-5" /> Loading...</div></div>
       </div>
     );
   }

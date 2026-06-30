@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import { paymentAPI } from "@/lib/api";
@@ -50,7 +51,7 @@ export default function PaymentsPage() {
       setRefunding(id);
       await paymentAPI.refund(id, {});
       fetchPayments();
-    } catch { alert("Failed to process refund"); }
+    } catch { toast.error("Failed to process refund"); }
     finally { setRefunding(null); }
   };
 

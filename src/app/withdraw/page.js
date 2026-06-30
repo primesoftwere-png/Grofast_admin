@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import { withdrawAPI } from "@/lib/api";
@@ -36,7 +37,7 @@ export default function WithdrawPage() {
       setActioning(id);
       await withdrawAPI.approve(id, {});
       fetchRequests();
-    } catch { alert("Failed to approve"); }
+    } catch { toast.error("Failed to approve"); }
     finally { setActioning(null); }
   };
 
@@ -47,7 +48,7 @@ export default function WithdrawPage() {
       setActioning(id);
       await withdrawAPI.reject(id, { reason });
       fetchRequests();
-    } catch { alert("Failed to reject"); }
+    } catch { toast.error("Failed to reject"); }
     finally { setActioning(null); }
   };
 

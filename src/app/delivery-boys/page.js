@@ -1,3 +1,4 @@
+import { Loader2 } from 'lucide-react';
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -713,7 +714,7 @@ export default function RidersPage() {
       {loading ? (
         <div className="flex flex-col items-center justify-center gap-3 p-12 text-gray-400">
           <Loader2 className="h-8 w-8 animate-spin" />
-          <span className="text-sm">Loading delivery boys...</span>
+          <span className="text-sm"><div className="flex items-center justify-center gap-2"><Loader2 className="animate-spin w-4 h-4" /> Loading delivery boys...</div></span>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">

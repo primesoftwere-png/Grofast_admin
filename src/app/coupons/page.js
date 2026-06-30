@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import { couponAPI } from "@/lib/api";
@@ -28,21 +29,21 @@ export default function CouponsPage() {
 
   const handleCreate = async () => {
     if (!form.offerName || !form.couponCode || !form.discountValue || !form.validFrom || !form.validUntil)
-      return alert("Offer name, code, discount value, and dates are required");
+      return toast.error("Offer name, code, discount value, and dates are required");
     try {
       setSaving(true);
       await couponAPI.create({ ...form, discountValue: Number(form.discountValue), minOrderAmount: Number(form.minOrderAmount || 0), maxDiscountAmount: Number(form.maxDiscountAmount || 0), usageLimit: Number(form.usageLimit || 0) });
       setShowForm(false);
       setForm({ offerName: "", couponCode: "", couponType: "percentage", discountValue: "", minOrderAmount: "", maxDiscountAmount: "", usageLimit: "", validFrom: "", validUntil: "" });
       fetchCoupons();
-    } catch (e) { alert("Failed to create coupon: " + (e.response?.data?.message || e.message)); }
+    } catch (e) { toast.error("Failed to create coupon: " + (e.response?.data?.message || e.message)); }
     finally { setSaving(false); }
   };
 
   const handleDelete = async (id, code) => {
     if (!confirm(`Delete coupon ${code}?`)) return;
     try { await couponAPI.delete(id); setCoupons(c => c.filter(x => x._id !== id)); }
-    catch { alert("Failed to delete coupon"); }
+    catch { toast.error("Failed to delete coupon"); }
   };
 
   const handleToggle = async (coupon) => {
@@ -51,7 +52,7 @@ export default function CouponsPage() {
       if (coupon.status === "active") await couponAPI.deactivate(coupon._id);
       else await couponAPI.activate(coupon._id);
       fetchCoupons();
-    } catch { alert("Failed to update status"); }
+    } catch { toast.error("Failed to update status"); }
     finally { setActioning(null); }
   };
 

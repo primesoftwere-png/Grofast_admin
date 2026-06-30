@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import { supportAPI } from "@/lib/api";
@@ -49,7 +50,7 @@ export default function SupportPage() {
       setSelected(res.data);
       setReply("");
       fetchTickets();
-    } catch { alert("Failed to send reply"); }
+    } catch { toast.error("Failed to send reply"); }
     finally { setSending(false); }
   };
 
@@ -60,19 +61,19 @@ export default function SupportPage() {
       const res = await supportAPI.close(id);
       if (selected?._id === id) setSelected(res.data);
       fetchTickets();
-    } catch { alert("Failed to close ticket"); }
+    } catch { toast.error("Failed to close ticket"); }
     finally { setClosing(false); }
   };
 
   const handleCreate = async () => {
-    if (!newTicket.subject.trim()) return alert("Subject is required");
+    if (!newTicket.subject.trim()) return toast.error("Subject is required");
     try {
       setCreating(true);
       await supportAPI.create(newTicket);
       setShowCreate(false);
       setNewTicket({ subject: "", description: "", priority: "Medium" });
       fetchTickets();
-    } catch { alert("Failed to create ticket"); }
+    } catch { toast.error("Failed to create ticket"); }
     finally { setCreating(false); }
   };
 

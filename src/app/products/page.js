@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import { productAPI, categoryAPI } from "@/lib/api";
@@ -43,7 +44,7 @@ export default function ProductsPage() {
       await productAPI.delete(id);
       setProducts(p => p.filter(x => x._id !== id));
     } catch (e) {
-      alert("Failed to delete product");
+      toast.error("Failed to delete product");
     } finally {
       setDeleting(null);
     }

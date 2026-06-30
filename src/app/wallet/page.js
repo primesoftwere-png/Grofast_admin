@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import { walletAPI } from "@/lib/api";
@@ -32,14 +33,14 @@ export default function WalletPage() {
   useEffect(() => { fetchWallets(); }, [fetchWallets]);
 
   const handleTransaction = async () => {
-    if (!amount || Number(amount) <= 0) return alert("Enter a valid amount");
+    if (!amount || Number(amount) <= 0) return toast.error("Enter a valid amount");
     try {
       setProcessing(true);
       if (modal.type === "credit") await walletAPI.credit(modal.wallet._id, { amount: Number(amount), note });
       else await walletAPI.debit(modal.wallet._id, { amount: Number(amount), note });
       setModal(null); setAmount(""); setNote("");
       fetchWallets();
-    } catch (e) { alert(e.response?.data?.message || "Transaction failed"); }
+    } catch (e) { toast.error(e.response?.data?.message || "Transaction failed"); }
     finally { setProcessing(false); }
   };
 
