@@ -1,7 +1,11 @@
 import axios from 'axios';
 
 // API Base URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001';
+let API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001';
+
+if (API_BASE_URL && !API_BASE_URL.startsWith('http')) {
+  API_BASE_URL = `https://${API_BASE_URL}`;
+}
 
 // Create axios instance
 const axiosInstance = axios.create({
